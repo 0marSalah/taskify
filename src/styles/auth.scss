@@ -1,0 +1,112 @@
+@import './globals.css';
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  width: clamp(300px, 100%, 400px);
+  border: 1px solid var(--color-gray);
+  padding: 2rem;
+  border-radius: 30px;
+  box-shadow: 0 5px 5px var(--color-gray);
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+h1 {
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+input:not([type='submit']) {
+  padding: 0.6rem;
+  border: 1px solid var(--color-gray);
+  border-radius: 0.25rem;
+  width: 100%;
+  background-color: transparent;
+  color: var(--color-white);
+  font-size: 0.9rem;
+  border-radius: 10px;
+  margin-top: 0.5rem;
+}
+
+input:not([type='submit']):focus {
+  outline: none;
+  border-color: var(--color-light-blue);
+}
+
+input[type='submit'] {
+  margin-block: 1rem;
+  padding: 0.6rem;
+  border: none;
+  border-radius: 0.25rem;
+  width: 100%;
+  background-color: var(--color-light-blue);
+  color: var(--color-white);
+  font-size: 1rem;
+  border-radius: 10px;
+  cursor: pointer;
+  box-shadow: 0 2px 2px var(--color-gray);
+  transition: box-shadow, opacity 0.2s ease-in-out;
+}
+
+input[type='submit']:hover {
+  opacity: 0.8;
+}
+
+.reverse-link {
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+  text-decoration: underline;
+  text-transform: none;
+}
+
+.loading-circle {
+  width: 25px;
+  height: 25px;
+  border: 2px solid var(--color-light-blue);
+  border-top: 5px solid transparent;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-block: 0.5rem;
+  margin-inline: auto;
+}
+
+.error-message {
+  color: var(--color-red);
+  text-decoration: none;
+  margin-block: -10px 5px;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg); /* 0 degrees rotation */
+  }
+  100% {
+    transform: rotate(360deg); /* 360 degrees rotation */
+  }
+}
+
+.password-input {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  input {
+    width: 90%;
+  }
+}
+
+.eye {
+  --eye-size: 1.5rem;
+
+  margin-top: 0.5rem;
+  cursor: pointer;
+  svg {
+    width: var(--eye-size);
+    height: var(--eye-size);
+  }
+}
