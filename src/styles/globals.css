@@ -1,14 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@100;200;300;400;500&family=Nosifer&family=Syne:wght@400;500;600&display=swap');
+
 :root {
   --color-light-blue: #7AABE2;
   --color-black: #232939;
   --color-gray: #414758;
   --color-white: #FFFFFF;
   --color-red: #dd2929;
+  --color-primary: #7AABE2;
+  --color-secondary: #232939;
 
   --dark-gradiant: linear-gradient(90deg, rgba(34, 34, 34, 1) 36%, rgba(34, 34, 34, 1) 55%, rgb(48, 51, 58) 70%, rgba(36, 36, 36, 1) 86%);
   ;
   --light-blue-gradiant: linear-gradient(90deg, rgba(95, 94, 204, 1) 0%, rgba(120, 171, 226, 1) 100%);
   --blur-light-blue-gradiant: linear-gradient(90deg, rgba(34, 31, 201, 0.233) 0%, rgba(37, 115, 199, 0.623) 100%);
+
+  --border-radius: 30px;
 }
 
 * {
@@ -27,10 +33,11 @@ body,
 }
 
 body {
-  font-family: 'Roboto', sans-serif;
+  font-family: kanit;
   color: var(--color-white);
   width: 100vw;
   height: 100vh;
+  font-weight: 300;
   /* background: var(--light-blue-gradiant); */
 }
 
@@ -41,10 +48,31 @@ body {
 }
 
 .wrapper {
-  border-radius: 30px;
+  border-radius: var(--border-radius);
   width: 95vw;
   height: 95vh;
   background: var(--dark-gradiant);
+}
+
+.app,
+.container {
+  width: 100%;
+  height: 100%;
+  display: contents;
+}
+
+.container {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: auto 85%;
+}
+
+.component {
+  padding: 3rem 2rem;
+  /* background-color: var(--color-black); */
+  border-radius: var(--border-radius);
+  margin: 10px;
+  max-width: 85%;
 }
 
 

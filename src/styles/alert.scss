@@ -1,0 +1,109 @@
+@import './globals.css';
+
+.alert {
+  position: fixed;
+  z-index: 2;
+  width: 100vw;
+  height: 100vh;
+  top: 0%;
+  left: 0%;
+}
+
+.alert::after {
+  content: '';
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+  backdrop-filter: blur(5px);
+  z-index: 1;
+}
+
+.alert-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: var(--color-black);
+  color: var(--color-text);
+  padding: 3rem 4rem;
+  border-radius: var(--border-radius);
+  z-index: 3;
+
+  animation: fade-up 0.5s ease-in-out both;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+.alert-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+
+  h2 {
+    font-size: 1.5rem;
+    margin-block: 0.5rem;
+    font-weight: 700;
+    color: var(--color-red);
+  }
+
+  p {
+    font-size: 1rem;
+    margin-block: 0.5rem;
+    font-weight: 400;
+    color: #eee;
+  }
+}
+
+.alert-action {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.btn {
+  color: var(--color-text);
+  border: none;
+  border-radius: 10px;
+  padding: 1rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  border: 1px solid transparent;
+}
+
+.btn-primary {
+  background-color: var(--color-primary);
+}
+.btn-secondary {
+  border: 1px solid var(--color-primary);
+  background-color: var(--color-secondary);
+}
+
+.btn-primary:hover {
+  border: 1px solid var(--color-primary);
+  background-color: var(--color-secondary);
+}
+
+.btn-secondary:hover {
+  background-color: var(--color-primary);
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -10%);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+}

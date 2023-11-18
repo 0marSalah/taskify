@@ -1,0 +1,30 @@
+{
+  "logo": "/logo.png",
+  "list": [
+    {
+      "name": "Dashboard",
+      "url": "/",
+      "icon": "/icons/dashboard.png"
+    },
+    {
+      "name": "Projects",
+      "url": "/projects",
+      "icon": "/icons/project.png"
+    },
+    {
+      "name": "Calender",
+      "url": "/calender",
+      "icon": "/icons/calender.png"
+    },
+    {
+      "name": "Reports",
+      "url": "/reports",
+      "icon": "/icons/report.png"
+    },
+    {
+      "name": "Settings",
+      "url": "/settings",
+      "icon": "/icons/setting.png"
+    }
+  ]
+}

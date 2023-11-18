@@ -3,8 +3,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import fetcher from 'src/utilities/fetcher';
 import '../styles/auth.scss';
 import Input from './Input';
-import { getCookie, setCookie } from 'src/utilities/cookie';
-import { AuthContext } from 'src/hooks/useAuth';
+import { setCookie } from 'src/utilities/cookie';
+import { useAuth } from 'src/hooks/useAuth';
 
 type AuthType = {
   form: 'signup' | 'signin';
@@ -22,7 +22,7 @@ const AuthForm = ({ form }: AuthType) => {
     password: ''
   });
   const [loading, setLoading] = React.useState(false);
-  const { setUser } = React.useContext(AuthContext);
+  const { setUser } = useAuth();
 
   const navigate = useNavigate();
 

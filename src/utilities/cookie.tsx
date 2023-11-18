@@ -6,10 +6,10 @@ export const setCookie = (value: string) => {
   });
 };
 
-export const getCookie = () => {
+export const getAuthCookie = () => {
   return Cookie.get('auth_key') || false;
 };
 
-export const removeCookie = () => {
+export const removeAuthCookie = () => {
   Cookie.remove('auth_key');
 };
