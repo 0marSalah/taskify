@@ -42,15 +42,8 @@ export const AuthProvider = ({ children }: any) => {
   const [user, setUser] = React.useState(null);
 
   const getUser = async () => {
-    const user = await fetch('https://api-timetracker.onrender.com/user', {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${getAuthCookie()}`
-      }
-    });
-    const response = await user.json();
-    if (response.data) setUser(response.data);
+    const res = await fetcher('/user', 'GET', {});
+    if (res && res.status === 'success') setUser(res.data);
     else setUser(null);
   };
 
