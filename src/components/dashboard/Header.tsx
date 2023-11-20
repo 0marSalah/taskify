@@ -18,7 +18,7 @@ const Header = () => {
   if (!user) return null;
 
   return (
-    <section className="header">
+    <section className="header" style={{ marginBottom: '2rem' }}>
       <div className="header-name">
         <h1>Welcome back {user.name.split(' ')[0]}!</h1>
         <p>You are doing great, keep going</p>
@@ -33,8 +33,8 @@ const Header = () => {
         <div className="header-profile">
           <img src="/avatar2.jpg" alt="profile" className="header-avatar" />
           <div className="name">
-            <h2>Omar Salah</h2>
-            <p>omar.salah1597@gmail.com</p>
+            <h2>{user.name}</h2>
+            <p style={{ textTransform: 'none' }}>{user.email}</p>
           </div>
         </div>
       </div>

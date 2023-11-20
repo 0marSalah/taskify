@@ -1,5 +1,5 @@
 import React from 'react';
-import '../styles/auth.scss';
+import '../../styles/auth.scss';
 import LinedEye from 'src/svg/LinedEye';
 import NormalEye from 'src/svg/NormalEye';
 
@@ -18,7 +18,7 @@ type InputType = {
   setFormData: React.Dispatch<React.SetStateAction<FormType>>;
 };
 
-const Input = ({
+const AuthInput = ({
   label,
   type,
   error = false,
@@ -78,4 +78,4 @@ const Input = ({
   );
 };
 
-export default Input;
+export default AuthInput;

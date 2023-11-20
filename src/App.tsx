@@ -1,10 +1,11 @@
-import React from 'react';
 import './styles/globals.css';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import AuthForm from './components/AuthForm';
+import AuthForm from './components/forms/AuthForm';
 import { AuthProvider, ProtectRoute } from './hooks/useAuth';
 import Layout from './components/Layout';
 import Dashboard from './components/dashboard/Dashboard';
+import ProjectsPage from './components/projects/ProjectsPage';
+import Project from './components/projects/Project';
 
 const router = createBrowserRouter([
   {
@@ -30,7 +31,17 @@ const router = createBrowserRouter([
     element: (
       <Layout>
         <ProtectRoute>
-          <div>projects</div>
+          <ProjectsPage />
+        </ProtectRoute>
+      </Layout>
+    )
+  },
+  {
+    path: '/projects/:id',
+    element: (
+      <Layout>
+        <ProtectRoute>
+          <Project />
         </ProtectRoute>
       </Layout>
     )

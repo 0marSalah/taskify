@@ -1,0 +1,167 @@
+@import '../globals.css';
+
+.projects {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  border-radius: var(--border-radius);
+  background-color: var(--color-black);
+  padding: 1rem 2rem 2rem 2rem;
+  box-shadow: 0 3px 3px var(--color-gray);
+  transition: all 0.2s ease-in-out;
+  &:hover {
+    box-shadow: 0 5px 5px var(--color-gray);
+  }
+
+  .project-title {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+    width: 100%;
+    p {
+      font-size: 0.9rem;
+      color: var(--color-white);
+    }
+    h1,
+    p {
+      text-align: left;
+      margin-bottom: 0;
+    }
+  }
+}
+
+.add-btn {
+  background-color: transparent;
+  margin-inline: 2rem;
+
+  img {
+    border: 1px solid var(--color-gray);
+    border-radius: 50%;
+    padding: 0.5rem;
+    width: 50px;
+    height: 50px;
+    &:hover {
+      opacity: 0.8;
+      animation: spin 0.3s ease-in-out backwards;
+    }
+  }
+}
+.projects-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.project-page-container {
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.card-actions {
+  position: relative;
+}
+
+.project-card {
+  min-width: 333px;
+  display: flex;
+  flex: 1;
+  gap: 1rem;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+  border-radius: 10px;
+  border: 0.1rem solid var(--color-gray);
+  box-shadow: 0 1px 2px var(--color-gray);
+  transition: all 0.35s ease-in-out;
+  cursor: pointer;
+
+  &:hover {
+    box-shadow: 7px 7px 5px var(--color-gray);
+  }
+}
+p,
+span {
+  text-transform: capitalize;
+  &[data-status='todo'] {
+    // Styles for TODO
+    color: var(--color-light-blue);
+  }
+  &[data-status='in_progress'] {
+    // Styles for IN_PROGRESS
+    color: #f7cb7b;
+  }
+  &[data-status='done'] {
+    // Styles for DONE
+    color: #8cf78c;
+  }
+}
+
+.btn-toggle,
+.btn-status {
+  background-color: transparent;
+  border: 1px solid var(--color-gray);
+  border-radius: var(--border-radius);
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  color: var(--color-white);
+  text-transform: capitalize;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  // margin-left: 2rem;
+  white-space: nowrap;
+  text-align: center;
+
+  img {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+.btn-toggle {
+  &:hover {
+    opacity: 0.8;
+  }
+  &[data-status='todo'] {
+    // Styles for TODO
+    color: var(--color-light-blue);
+  }
+  &[data-status='in progress'] {
+    // Styles for IN_PROGRESS
+    color: #f7cb7b;
+  }
+  &[data-status='done'] {
+    // Styles for DONE
+    color: #8cf78c;
+  }
+}
+
+.status-switch {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--color-gray);
+  padding: 1rem;
+  margin: 1rem 0;
+  background-color: var(--color-black);
+  z-index: 2;
+  white-space: nowrap;
+  gap: 0.5rem;
+  box-shadow: 3px 3px 5px var(--color-gray);
+}
+
+.status-btn.active {
+  background-color: var(--color-light-blue);
+}
+
+// animation
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(90deg);
+  }
+}

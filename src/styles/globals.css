@@ -83,13 +83,15 @@ a {
 
 button {
   cursor: pointer;
-  background-color: var(--color-black);
   border: none;
 }
 
-/* @media (min-width: 768px) {
-  .wrapper {
-    width: 80vw;
-    height: 80vh;
-  }
-} */
+h1,
+h3 {
+  text-align: left;
+  font-weight: 400;
+}
+
+ul {
+  list-style: none;
+}

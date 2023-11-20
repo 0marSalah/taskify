@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import fetcher from 'src/utilities/fetcher';
-import '../styles/auth.scss';
-import Input from './Input';
+import '../../styles/auth.scss';
+import Input from '../Inputs/AuthInput';
 import { setCookie } from 'src/utilities/cookie';
 import { useAuth } from 'src/hooks/useAuth';
 
