@@ -10,7 +10,6 @@ const ProjectsPage = () => {
   const [openForm, setOpenForm] = useState(false);
 
   const { projects } = useAuth();
-  console.log(projects);
   return (
     <div className="projects-page">
       <div

@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getAuthCookie } from 'src/utilities/cookie';
 import fetcher from 'src/utilities/fetcher';
-import fetchProjects from 'src/utilities/fetchProjects';
 
 export type UserType = {
   name: string;
@@ -38,7 +37,7 @@ export const AuthProvider = ({ children }: any) => {
     else setUser(null);
   };
   const getProjects = async () => {
-    const res = await fetchProjects();
+    const res = await fetcher('/api/projects', 'GET', {});
     if (res && res.status === 'success') setProjects(res.data);
     else setProjects(null);
   };

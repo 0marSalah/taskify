@@ -101,11 +101,7 @@ const AuthForm = ({ form }: AuthType) => {
               password: formData.password
             };
 
-      const res = await fetcher(
-        process.env.REACT_APP_HOST_URL + path,
-        'POST',
-        body
-      );
+      const res = await fetcher(path, 'POST', body);
 
       if (res.error) {
         setErrors({

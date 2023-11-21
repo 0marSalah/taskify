@@ -5,7 +5,7 @@ const TaskInput = ({ onAddTask }: any) => {
 
   const handleAddTask = () => {
     onAddTask(task);
-    setTask(''); // Clear input after adding
+    setTask('');
   };
 
   return (
@@ -15,7 +15,8 @@ const TaskInput = ({ onAddTask }: any) => {
         alignItems: 'center',
         justifyContent: 'space-between',
         gap: '1rem',
-        marginBlock: '1rem'
+        marginBlock: '1rem',
+        maxWidth: '400px'
       }}
     >
       <input
@@ -27,7 +28,13 @@ const TaskInput = ({ onAddTask }: any) => {
           margin: 0
         }}
       />
-      <button className="btn task-btn" onClick={handleAddTask}>
+      <button
+        style={{
+          borderRadius: '10px'
+        }}
+        className="btn task-btn"
+        onClick={handleAddTask}
+      >
         Add Task
       </button>
     </div>

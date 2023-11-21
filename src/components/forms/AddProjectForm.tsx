@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import TaskInput from '../Inputs/TaskInput';
 import fetcher from 'src/utilities/fetcher';
 import { useAuth } from 'src/hooks/useAuth';
 
@@ -11,7 +10,7 @@ type ProjectDataType = {
   endDate: string;
 };
 
-const ProjectForm = ({ setOpenForm }: any) => {
+const ProjectForm = ({ type, setOpenForm }: any) => {
   const [projectData, setProjectData] = useState<ProjectDataType>({
     name: '',
     description: '',
@@ -27,10 +26,6 @@ const ProjectForm = ({ setOpenForm }: any) => {
   const handleInputChange = (e: any) => {
     setProjectData({ ...projectData, [e.target.name]: e.target.value });
   };
-
-  // const handleAddTask = (task: string) => {
-  //   setProjectData({ ...projectData, tasks: [...projectData.tasks, task] });
-  // };
 
   const validateFormData = () => {
     if (!projectData.name) {
@@ -76,7 +71,6 @@ const ProjectForm = ({ setOpenForm }: any) => {
     e.preventDefault();
     setError('');
     setLoading(true);
-    console.log('Project Data:', projectData);
     if (!validateFormData()) return;
 
     const body = {
@@ -170,13 +164,6 @@ const ProjectForm = ({ setOpenForm }: any) => {
           />
         </div>
       </div>
-      {/* <div>
-        <label>Tasks:</label>
-        {projectData.tasks.map((task, index) => (
-          <div key={index}>{task}</div>
-        ))}
-        <TaskInput onAddTask={handleAddTask} />
-      </div> */}
       {!!error && (
         <div
           style={{

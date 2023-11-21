@@ -9,7 +9,6 @@ import { AuthContext } from '../hooks/useAuth';
 const Navbar = () => {
   const location = useLocation();
   const { user } = React.useContext(AuthContext);
-  console.log(user);
 
   return (
     <div className="navbar">
