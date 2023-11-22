@@ -128,62 +128,68 @@ const AuthForm = ({ form }: AuthType) => {
   };
 
   return (
-    <div className="auth-form">
-      <h1>{form.toString() === 'signup' ? 'Signup' : 'Signin'}</h1>
-      <form>
-        {form.toString() === 'signup' && (
-          <>
-            <Input
-              label="Name"
-              type="text"
-              error={!!errors.name}
-              helperText={errors.name}
-              formData={formData}
-              setFormData={setFormData}
-            />
-          </>
-        )}
-        <Input
-          label="Email"
-          type="email"
-          error={!!errors.email}
-          helperText={errors.email}
-          formData={formData}
-          setFormData={setFormData}
-        />
-        <Input
-          label="Password"
-          type="password"
-          error={!!errors.password}
-          helperText={errors.password}
-          formData={formData}
-          setFormData={setFormData}
-        />
-        <LoadingButton
-          style={{
-            background: 'none',
-            border: 'none',
-            padding: '0',
-            marginBlock: '1rem'
-          }}
-          loading={loading}
-          onClick={() => {}}
-        >
-          <input
-            onClick={(e) => handleSubmit(e, '/' + form.toLowerCase())}
-            type="submit"
-            value={form.toString() === 'signup' ? 'Signup' : 'Signin'}
+    <>
+      <div className="logo">
+        <img src={'/logo.png'} alt="taskify" />
+        <h1>TASKIFY</h1>
+      </div>
+      <div className="auth-form">
+        <h1>{form.toString() === 'signup' ? 'Signup' : 'Signin'}</h1>
+        <form>
+          {form.toString() === 'signup' && (
+            <>
+              <Input
+                label="Name"
+                type="text"
+                error={!!errors.name}
+                helperText={errors.name}
+                formData={formData}
+                setFormData={setFormData}
+              />
+            </>
+          )}
+          <Input
+            label="Email"
+            type="email"
+            error={!!errors.email}
+            helperText={errors.email}
+            formData={formData}
+            setFormData={setFormData}
           />
-        </LoadingButton>
-      </form>
-      <p className="reverse-link">
-        <Link to={form.toLowerCase() === 'signup' ? '/signin' : '/signup'}>
-          {form.toLowerCase() === 'signup'
-            ? 'have account...? signin'
-            : "did'nt have account...? Signup"}
-        </Link>
-      </p>
-    </div>
+          <Input
+            label="Password"
+            type="password"
+            error={!!errors.password}
+            helperText={errors.password}
+            formData={formData}
+            setFormData={setFormData}
+          />
+          <LoadingButton
+            style={{
+              background: 'none',
+              border: 'none',
+              padding: '0',
+              marginBlock: '1rem'
+            }}
+            loading={loading}
+            onClick={() => {}}
+          >
+            <input
+              onClick={(e) => handleSubmit(e, '/' + form.toLowerCase())}
+              type="submit"
+              value={form.toString() === 'signup' ? 'Signup' : 'Signin'}
+            />
+          </LoadingButton>
+        </form>
+        <p className="reverse-link">
+          <Link to={form.toLowerCase() === 'signup' ? '/signin' : '/signup'}>
+            {form.toLowerCase() === 'signup'
+              ? 'have account...? signin'
+              : "did'nt have account...? Signup"}
+          </Link>
+        </p>
+      </div>{' '}
+    </>
   );
 };
 
