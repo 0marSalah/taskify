@@ -10,10 +10,9 @@ const StatusUpdate = ({
   return (
     <div className="card-actions">
       <button
-        data-status={status}
+        data-status={status.toLowerCase()}
         className="btn-toggle"
         onClick={() => setOpen(!open)}
-        data-statuss={status}
       >
         {status}
         <img src="/icons/arrow-down.png" alt="" />

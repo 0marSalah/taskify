@@ -69,6 +69,12 @@ const Project = () => {
     console.log(res);
   };
 
+  const handleDeketeProject = async () => {
+    const res = await fetcher(`/api/projects/${id}`, 'DELETE', {});
+    console.log(res);
+    window.location.href = '/projects';
+  };
+
   return (
     <div className="project-wrapper">
       {project ? (
@@ -82,7 +88,9 @@ const Project = () => {
               <StatusUpdate
                 {...{ open, setOpen, allStatus, status, handleStatusChange }}
               />
-              <button className="btn btn-danger">Delete</button>
+              <button onClick={handleDeketeProject} className="btn btn-danger">
+                Delete
+              </button>
             </div>
           </div>
           <hr />

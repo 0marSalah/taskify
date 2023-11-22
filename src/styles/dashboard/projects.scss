@@ -60,20 +60,19 @@
 
 .card-actions {
   position: relative;
-  margin-left: 2rem;
   width: fit-content;
 
   button,
   .active {
-    &[data-statuss='todo'] {
+    &[data-status='todo'] {
       // Styles for TODO
       color: var(--color-light-blue);
     }
-    &[data-statuss='in_progress'] {
+    &[data-status='in_progress'] {
       // Styles for IN_PROGRESS
       color: #f7cb7b;
     }
-    &[data-statuss='done'] {
+    &[data-status='done'] {
       // Styles for DONE
       color: #8cf78c;
     }
@@ -143,7 +142,7 @@ span {
     // Styles for TODO
     color: var(--color-light-blue);
   }
-  &[data-status='in progress'] {
+  &[data-status='in_progress'] {
     // Styles for IN_PROGRESS
     color: #f7cb7b;
   }

@@ -79,15 +79,24 @@ const ProjectForm = ({ type, setOpenForm }: any) => {
         projectData.description === '' ? null : projectData.description,
       status: projectData.status === '' ? null : projectData.status,
       startDate:
-        projectData.startDate === '' ? null : new Date(projectData.startDate),
-      endDate: projectData.endDate === '' ? null : new Date(projectData.endDate)
+        projectData.startDate === ''
+          ? null
+          : new Date(projectData.startDate).toISOString(),
+      endDate:
+        projectData.endDate === ''
+          ? null
+          : new Date(projectData.endDate).toISOString()
     };
+    console.log('Project Body:', body);
     const res = await fetcher('/api/projects', 'POST', body);
     console.log('Project Response:', res);
     if (res && res.status === 'success') {
       setLoading(false);
       setOpenForm(false);
       setProjects((prev: any) => [...prev, res.data]);
+    } else {
+      setLoading(false);
+      setError('Error adding project');
     }
   };
 
@@ -146,7 +155,7 @@ const ProjectForm = ({ type, setOpenForm }: any) => {
         <div>
           <label htmlFor="startdate">Start Date</label>
           <input
-            type="date"
+            type="datetime-local"
             name="startDate"
             value={projectData.startDate}
             onChange={handleInputChange}
@@ -156,7 +165,7 @@ const ProjectForm = ({ type, setOpenForm }: any) => {
         <div>
           <label htmlFor="enddate">End Date</label>
           <input
-            type="date"
+            type="datetime-local"
             name="endDate"
             value={projectData.endDate}
             onChange={handleInputChange}

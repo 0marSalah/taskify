@@ -5,6 +5,7 @@ import '../../styles/auth.scss';
 import Input from '../Inputs/AuthInput';
 import { setCookie } from 'src/utilities/cookie';
 import { useAuth } from 'src/hooks/useAuth';
+import LoadingButton from '../Loading';
 
 type AuthType = {
   form: 'signup' | 'signin';
@@ -78,14 +79,11 @@ const AuthForm = ({ form }: AuthType) => {
     const isValidPassword = validateFormData('password');
 
     if (
-      (path.toLowerCase() === 'signin' &&
-        (!isValidEmail || !isValidPassword)) ||
-      (path.toLowerCase() === 'signup' &&
-        (!isValidEmail || !isValidName || !isValidPassword))
-    ) {
-      setLoading(false);
+      path === '/signup' &&
+      (!isValidName || !isValidEmail || !isValidPassword)
+    )
       return;
-    }
+    if (path === '/signin' && (!isValidEmail || !isValidPassword)) return;
 
     try {
       setLoading(true);
@@ -115,7 +113,7 @@ const AuthForm = ({ form }: AuthType) => {
 
       if (res.token) {
         setCookie(res.token);
-        navigate('/');
+        window.location.href = '/';
       }
 
       if (res.data) {
@@ -161,15 +159,22 @@ const AuthForm = ({ form }: AuthType) => {
           formData={formData}
           setFormData={setFormData}
         />
-        {loading ? (
-          <div className="loading-circle"></div>
-        ) : (
+        <LoadingButton
+          style={{
+            background: 'none',
+            border: 'none',
+            padding: '0',
+            marginBlock: '1rem'
+          }}
+          loading={loading}
+          onClick={() => {}}
+        >
           <input
             onClick={(e) => handleSubmit(e, '/' + form.toLowerCase())}
             type="submit"
             value={form.toString() === 'signup' ? 'Signup' : 'Signin'}
           />
-        )}
+        </LoadingButton>
       </form>
       <p className="reverse-link">
         <Link to={form.toLowerCase() === 'signup' ? '/signin' : '/signup'}>

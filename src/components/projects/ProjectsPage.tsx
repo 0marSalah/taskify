@@ -5,6 +5,7 @@ import ProjectForm from '../forms/AddProjectForm';
 import '../../styles/dashboard/projects.scss';
 import '../../styles/projects/projectForm.scss';
 import { Link } from 'react-router-dom';
+import LoadingButton from '../Loading';
 
 const ProjectsPage = () => {
   const [openForm, setOpenForm] = useState(false);
