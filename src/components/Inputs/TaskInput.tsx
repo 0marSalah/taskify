@@ -1,9 +1,17 @@
 import React, { useState } from 'react';
+import LoadingButton from '../Loading';
 
-const TaskInput = ({ onAddTask }: any) => {
+type TaskInputType = {
+  onAddTask: (task: string) => void;
+  loading: boolean;
+};
+
+const TaskInput = ({ onAddTask, loading }: TaskInputType) => {
   const [task, setTask] = useState('');
 
-  const handleAddTask = () => {
+  const handleAddTask = (e: any) => {
+    e.preventDefault();
+    if (!task) return;
     onAddTask(task);
     setTask('');
   };
@@ -15,28 +23,26 @@ const TaskInput = ({ onAddTask }: any) => {
         alignItems: 'center',
         justifyContent: 'space-between',
         gap: '1rem',
-        marginBlock: '1rem',
+        marginBlock: '0.5rem 0',
         maxWidth: '400px'
       }}
     >
-      <input
-        type="text"
-        value={task}
-        onChange={(e) => setTask(e.target.value)}
-        placeholder="Enter a task name"
-        style={{
-          margin: 0
-        }}
-      />
-      <button
-        style={{
-          borderRadius: '10px'
-        }}
-        className="btn task-btn"
+      <form onSubmit={handleAddTask}>
+        <input
+          type="text"
+          value={task}
+          onChange={(e) => setTask(e.target.value)}
+          placeholder="Enter a task name"
+          style={{
+            margin: 0
+          }}
+        />
+      </form>
+      <LoadingButton
+        loading={loading}
+        value="Add Task"
         onClick={handleAddTask}
-      >
-        Add Task
-      </button>
+      />
     </div>
   );
 };

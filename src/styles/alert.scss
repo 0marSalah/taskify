@@ -67,36 +67,6 @@
   justify-content: center;
   gap: 1rem;
 }
-
-.btn {
-  color: var(--color-text);
-  border: none;
-  border-radius: 10px;
-  padding: 1rem 1.5rem;
-  font-size: 1rem;
-  font-weight: 700;
-  cursor: pointer;
-  transition: all 0.2s ease-in-out;
-  border: 1px solid transparent;
-}
-
-.btn-primary {
-  background-color: var(--color-primary);
-}
-.btn-secondary {
-  border: 1px solid var(--color-primary);
-  background-color: var(--color-secondary);
-}
-
-.btn-primary:hover {
-  border: 1px solid var(--color-primary);
-  background-color: var(--color-secondary);
-}
-
-.btn-secondary:hover {
-  background-color: var(--color-primary);
-}
-
 @keyframes fade-up {
   from {
     opacity: 0;

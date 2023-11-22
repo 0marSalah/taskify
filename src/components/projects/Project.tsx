@@ -4,71 +4,44 @@ import fetcher from 'src/utilities/fetcher';
 import TaskInput from '../Inputs/TaskInput';
 import '../../styles/projects/project.scss';
 import TaskCard from '../TaskCard';
+import { ProjectType, TaskType } from '../../types';
+import StatusUpdate from '../StatusUpdate';
 
-const allStatus = ['todo', 'in_progress', 'done'];
-
-type ProjectType = {
-  name: string;
-  description: string;
-  status: string;
-  createdAt: string;
-  updatedAt: string;
-  id: string;
-  tasks: {
-    name: string;
-    status: string;
-    createdAt: string;
-    updatedAt: string;
-    id: string;
-  }[];
-};
+export const allStatus = ['todo', 'in_progress', 'done'];
 
 const Project = () => {
   const { id } = useParams();
   const [project, setProject] = React.useState<ProjectType>();
-  const [statusState, setStatus] = React.useState({
-    done: 0,
-    in_progress: 0,
-    todo: 0
-  });
-
-  useEffect(() => {
-    let obj = {
-      done: 0,
-      todo: 0,
-      in_progress: 0
-    };
-    if (project && project.tasks.length > 0) {
-      project?.tasks.forEach((task: any) => {
-        if (task.status.toLowerCase() === 'todo') {
-          obj.todo += 1;
-        } else if (task.status.toLowerCase() === 'done') {
-          obj.done += 1;
-        } else {
-          obj.in_progress += 1;
-        }
-      });
-      setStatus(obj);
-    }
-  }, [project]);
+  const [loading, setLoading] = React.useState(false);
+  const [open, setOpen] = React.useState(false);
+  const [status, setStatus] = React.useState('TODO');
 
   /**
    * - add task to project
    * @param task coming from TaskInput
    */
   const handleAddTask = async (task: string) => {
-    const res = await fetcher(`/api/tasks`, 'POST', {
-      name: task,
-      projectId: id
-    });
-    console.log(res);
-    setProject((prev) => {
-      if (prev) {
-        const newProject = { ...prev };
-        newProject.tasks.push(res.data.name);
-        return newProject;
+    try {
+      if (!task) return;
+      setLoading(true);
+      const res = await fetcher(`/api/tasks`, 'POST', {
+        name: task,
+        projectId: id
+      });
+      console.log(res);
+      if (res.status === 'success' && res.data) {
+        setProject((prev) => {
+          if (prev) {
+            const newTask = res.data;
+            const newTasks = [...prev.tasks, newTask];
+            return { ...prev, tasks: newTasks };
+          }
+        });
       }
-    });
+      setLoading(false);
+    } catch {
+      console.log('error adding task');
+    }
   };
 
   useEffect(() => {
@@ -79,17 +52,38 @@ const Project = () => {
         setProject(undefined);
         return;
       }
+      setStatus(res.data.status);
     };
     getProject();
   }, [id]);
+
+  const handleStatusChange = async (e: any) => {
+    setStatus(e.target.textContent);
+    const newStatus = e.target.textContent.replace(' ', '_').toUpperCase();
+    console.log('Changing status of project with ID:', id);
+    console.log('New status:', newStatus);
+    setOpen(!open);
+    const res = await fetcher(`/api/projects/${id}`, 'PUT', {
+      status: newStatus
+    });
+    console.log(res);
+  };
 
   return (
     <div className="project-wrapper">
       {project ? (
         <div>
-          <div className="project-title">
-            <h1>{project.name}</h1>
-            <p>{project.description}</p>
+          <div className="project-title single-project">
+            <div className="info">
+              <h1>{project.name}</h1>
+              <p>{project.description}</p>
+            </div>
+            <div className="delete">
+              <StatusUpdate
+                {...{ open, setOpen, allStatus, status, handleStatusChange }}
+              />
+              <button className="btn btn-danger">Delete</button>
+            </div>
           </div>
           <hr />
           <div className="tasks">
@@ -106,24 +100,12 @@ const Project = () => {
               </span>{' '}
               tasks
             </p>
-            <TaskInput onAddTask={handleAddTask} />
+            <TaskInput loading={loading} onAddTask={handleAddTask} />
             {project.tasks.length > 0 && (
               <div className="tasks-parts">
-                {allStatus.map((s) => (
-                  <div key={s}>
-                    <h2>{s.replace('_', ' ')}</h2>
-                    <div className="tasks-container">
-                      {project.tasks
-                        .filter(
-                          (task) =>
-                            task.status.toLowerCase() === s.toLowerCase()
-                        )
-                        .map((task) => (
-                          <TaskCard task={task} />
-                        ))}
-                    </div>
-                  </div>
-                ))}
+                {allStatus.map((s) => {
+                  return renderTask(s, project, setProject);
+                })}
               </div>
             )}
           </div>
@@ -136,3 +118,33 @@ const Project = () => {
 };
 
 export default Project;
+
+const renderTask = (
+  s: string,
+  project: {
+    tasks: TaskType[];
+  },
+  setProject: (prev: any) => void
+) => {
+  // Filter tasks for the current status
+  const tasksForStatus = project.tasks.filter(
+    (task: { status: string; id: string }) =>
+      task?.status?.toLowerCase() === s?.toLowerCase()
+  );
+
+  // Sort tasks by status within the current column
+  const sortedTasks = tasksForStatus.sort((a: TaskType, b: TaskType) =>
+    a.status.localeCompare(b.status)
+  );
+
+  return (
+    <div key={s}>
+      <h2>{s.replace('_', ' ')}</h2>
+      <div className="tasks-container">
+        {sortedTasks.map((task: TaskType) => (
+          <TaskCard setProject={setProject} task={task} key={task.id} />
+        ))}
+      </div>
+    </div>
+  );
+};

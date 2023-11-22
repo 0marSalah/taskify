@@ -3,11 +3,22 @@
     font-weight: 300;
   }
 }
-.project-title {
+.project-title,
+.single-project {
   margin-bottom: 10px;
-  h1 {
-    text-align: left;
+  display: flex;
+  gap: 1rem;
+  white-space: nowrap;
+  .info {
+    h1 {
+      text-align: left;
+      margin: 0;
+    }
   }
+}
+
+.single-project {
+  flex-direction: column;
 }
 
 .task-card {
@@ -31,6 +42,7 @@
   grid-template-columns: 1fr 1fr 1fr;
   gap: 1rem;
   justify-content: space-between;
+  margin: 0;
 
   h2 {
     margin: 0.5rem 0;
@@ -64,5 +76,15 @@
   span {
     font-size: 1.2rem;
     color: #fff;
+  }
+}
+
+.delete {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  width: 300px;
+  button {
+    font-size: 0.8rem;
   }
 }

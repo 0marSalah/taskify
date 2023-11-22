@@ -1,19 +1,35 @@
 import React, { useState } from 'react';
 import fetcher from 'src/utilities/fetcher';
+import StatusUpdate from './StatusUpdate';
 
 const allStatus = ['TODO', 'IN PROGRESS', 'DONE'];
 
-const TaskCard = ({ task }: any) => {
-  console.log('task', task);
+const TaskCard = ({ setProject, task }: any) => {
   const [status, setStatus] = useState(task.status);
   const [open, setOpen] = useState(false);
   const [taskName, setTaskName] = useState(task.name);
 
   const handleStatusChange = async (e: any) => {
     setStatus(e.target.textContent);
+    const newStatus = e.target.textContent.replace(' ', '_').toUpperCase();
+    console.log('Changing status of task with ID:', task.id);
+    console.log('New status:', newStatus);
     setOpen(!open);
+    setProject((prev: any) => {
+      const updatedTasks = prev.tasks.map((t: any) => {
+        if (t.id === task.id) {
+          console.log('Found task to update', t.id);
+          return {
+            ...t,
+            status: newStatus
+          };
+        }
+        return t;
+      });
+      return { ...prev, tasks: updatedTasks };
+    });
     const res = await fetcher(`/api/tasks/${task.id}`, 'PUT', {
-      status: e.target.textContent.replace(' ', '_').toUpperCase()
+      status: newStatus
     });
     console.log(res);
   };
@@ -46,31 +62,10 @@ const TaskCard = ({ task }: any) => {
           onBlur={handleUpdateTaskName}
         />
       </form>
-      <div className="card-actions">
-        <button
-          data-status={task.status}
-          className="btn-toggle"
-          onClick={() => setOpen(!open)}
-        >
-          {status}
-          <img src="/icons/arrow-down.png" alt="" />
-        </button>
-        {open && (
-          <div onBlur={() => setOpen(false)} className="status-switch">
-            {allStatus.map((s) => (
-              <button
-                key={s}
-                className={
-                  'btn-status btn-secondary ' +
-                  (s === status || s === task.status ? 'active' : '')
-                }
-                onClick={handleStatusChange}
-              >
-                {s}
-              </button>
-            ))}
-          </div>
-        )}
+      <div className="">
+        <StatusUpdate
+          {...{ open, setOpen, allStatus, status, handleStatusChange }}
+        />
       </div>
     </div>
   );
