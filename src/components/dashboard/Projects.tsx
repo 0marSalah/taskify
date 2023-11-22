@@ -45,7 +45,7 @@ const Projects = () => {
                   <div className="card-title">
                     <h3>{project.name}</h3>
                     <p>
-                      {project.description.length > 100
+                      {project.description && project.description.length > 100
                         ? project.description.slice(0, 100) + '...'
                         : project.description}
                     </p>
