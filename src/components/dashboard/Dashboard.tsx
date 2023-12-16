@@ -1,12 +1,18 @@
 import React from 'react';
-import Header from './Header';
 import '../../styles/dashboard/dashboard.scss';
 import Projects from './Projects';
+import { Helmet } from 'react-helmet-async';
 
 const Dashboard = () => {
   return (
     <div className="dashboard">
-      {/* <Header /> */}
+      <Helmet>
+        <title>Dashboard</title>
+        <meta
+          name="description"
+          content="Dashboard  | Manage projects and know the performance and more"
+        />
+      </Helmet>
       <div className="middle">
         <Projects />
       </div>

@@ -6,6 +6,9 @@ import Layout from './components/Layout';
 import Dashboard from './components/dashboard/Dashboard';
 import ProjectsPage from './components/projects/ProjectsPage';
 import Project from './components/projects/Project';
+import { Helmet } from 'react-helmet-async';
+import { Link } from 'react-router-dom';
+import { hover } from '@testing-library/user-event/dist/hover';
 
 const router = createBrowserRouter([
   {
@@ -50,6 +53,10 @@ const router = createBrowserRouter([
     path: '/calender',
     element: (
       <Layout>
+        <Helmet>
+          <title>Calender</title>
+          <meta name="description" content="Calender" />
+        </Helmet>
         <ProtectRoute>
           <div>calender</div>
         </ProtectRoute>
@@ -60,6 +67,10 @@ const router = createBrowserRouter([
     path: '/reports',
     element: (
       <Layout>
+        <Helmet>
+          <title>Reports</title>
+          <meta name="description" content="Reports" />
+        </Helmet>
         <ProtectRoute>
           <div>reports</div>
         </ProtectRoute>
@@ -70,6 +81,10 @@ const router = createBrowserRouter([
     path: '/settings',
     element: (
       <Layout>
+        <Helmet>
+          <title>Settings</title>
+          <meta name="description" content="Settings" />
+        </Helmet>
         <ProtectRoute>
           <div>settings</div>
         </ProtectRoute>
@@ -78,7 +93,27 @@ const router = createBrowserRouter([
   },
   {
     path: '*',
-    element: <div>Not Found</div>
+    element: (
+      <>
+        <Helmet>
+          <title>Not Found</title>
+          <meta name="description" content="Not Found" />
+        </Helmet>
+        <h1>
+          404 <br /> Not Found
+        </h1>
+        <div
+          style={{
+            marginTop: '2rem',
+            textAlign: 'center',
+            textDecoration: 'underline',
+            fontSize: '1.5rem'
+          }}
+        >
+          <Link to="/">Go back to home</Link>
+        </div>
+      </>
+    )
   }
 ]);
 

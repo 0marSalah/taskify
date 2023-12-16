@@ -6,6 +6,7 @@ import '../../styles/dashboard/projects.scss';
 import '../../styles/projects/projectForm.scss';
 import { Link } from 'react-router-dom';
 import LoadingButton from '../Loading';
+import { Helmet } from 'react-helmet-async';
 
 const ProjectsPage = () => {
   const [openForm, setOpenForm] = useState(false);
@@ -13,6 +14,13 @@ const ProjectsPage = () => {
   const { projects } = useAuth();
   return (
     <div className="projects-page">
+      <Helmet>
+        <title>Projects</title>
+        <meta
+          name="description"
+          content="Projects | Manage projects and know the performance and more"
+        />
+      </Helmet>
       <div
         className="project-title"
         style={{

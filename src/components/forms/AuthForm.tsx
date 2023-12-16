@@ -6,6 +6,7 @@ import Input from '../Inputs/AuthInput';
 import { setCookie } from 'src/utilities/cookie';
 import { useAuth } from 'src/hooks/useAuth';
 import LoadingButton from '../Loading';
+import { Helmet } from 'react-helmet-async';
 
 type AuthType = {
   form: 'signup' | 'signin';
@@ -129,6 +130,19 @@ const AuthForm = ({ form }: AuthType) => {
 
   return (
     <>
+      <Helmet>
+        <title>
+          {form.toString() === 'signup'
+            ? 'Taskify | Signup'
+            : 'Taskify | Signin'}
+        </title>
+        <meta
+          name="description"
+          content={
+            form.toString() === 'signup' ? 'Signup | Signup' : 'Signin | Signin'
+          }
+        />
+      </Helmet>
       <div className="logo">
         <img src={'/logo.png'} alt="taskify" />
         <h1>TASKIFY</h1>

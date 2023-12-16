@@ -6,6 +6,7 @@ import '../../styles/projects/project.scss';
 import TaskCard from '../TaskCard';
 import { ProjectType, TaskType } from '../../types';
 import StatusUpdate from '../StatusUpdate';
+import { Helmet } from 'react-helmet-async';
 
 export const allStatus = ['todo', 'in_progress', 'done'];
 
@@ -75,6 +76,10 @@ const Project = () => {
     <div className="project-wrapper">
       {project ? (
         <div>
+          <Helmet>
+            <title>{project.name}</title>
+            <meta name="description" content={project.description} />
+          </Helmet>
           <div className="project-title single-project">
             <div className="info">
               <h1>{project.name}</h1>
