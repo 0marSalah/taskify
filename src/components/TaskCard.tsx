@@ -6,34 +6,30 @@ import LoadingButton from './Loading';
 const allStatus = ['TODO', 'IN_PROGRESS', 'DONE'];
 
 const TaskCard = ({ setProject, task }: any) => {
-  const [status, setStatus] = useState(task.status);
   const [open, setOpen] = useState(false);
   const [taskName, setTaskName] = useState(task.name);
   const [loading, setLoading] = useState(false);
-
   const handleStatusChange = async (e: any) => {
-    setStatus(e.target.textContent);
     const newStatus = e.target.textContent.replace(' ', '_').toUpperCase();
-    console.log('Changing status of task with ID:', task.id);
-    console.log('New status:', newStatus);
-    setOpen(!open);
-    setProject((prev: any) => {
-      const updatedTasks = prev.tasks.map((t: any) => {
-        if (t.id === task.id) {
-          console.log('Found task to update', t.id);
-          return {
-            ...t,
-            status: newStatus
-          };
-        }
-        return t;
+    try {
+      setLoading(true); // Assuming you have a loading state to indicate API call progress
+      
+      setProject((prev: any) => {
+        const updatedTasks = prev.tasks.map((t: any) =>
+          t.id === task.id ? { ...t, status: newStatus } : t
+        );
+        return { ...prev, tasks: updatedTasks };
       });
-      return { ...prev, tasks: updatedTasks };
-    });
-    const res = await fetcher(`/api/tasks/${task.id}`, 'PUT', {
-      status: newStatus
-    });
-    console.log(res);
+
+      await fetcher(`/api/tasks/${task.id}`, 'PUT', {
+        status: newStatus
+      });
+    } catch (error) {
+      console.error('Error updating task status:', error);
+      // Handle exception here
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleUpdateTaskName = async (e: any) => {
@@ -79,7 +75,7 @@ const TaskCard = ({ setProject, task }: any) => {
       </form>
       <div className="delete-task">
         <StatusUpdate
-          {...{ open, setOpen, allStatus, status, handleStatusChange }}
+          {...{ open, setOpen, allStatus, status: task.status, handleStatusChange }}
         />
         <LoadingButton
           style={{ padding: '0.5rem', border: 'none', background: 'none' }}

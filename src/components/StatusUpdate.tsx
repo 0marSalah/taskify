@@ -1,16 +1,24 @@
 import React from 'react';
 
+export type StatusUpdateType = {
+  open: boolean;
+  setOpen: (open: boolean) => void;
+  allStatus: string[];
+  status: string;
+  handleStatusChange: (e: React.MouseEvent<HTMLButtonElement>) => void;
+};
+
 const StatusUpdate = ({
   open,
   setOpen,
   allStatus,
   status,
   handleStatusChange
-}: any) => {
+}: StatusUpdateType) => {
   return (
     <div className="card-actions">
       <button
-        data-status={status.toLowerCase()}
+        data-status={status?.toLowerCase()}
         className="btn-toggle"
         onClick={() => setOpen(!open)}
       >

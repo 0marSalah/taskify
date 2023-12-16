@@ -60,18 +60,14 @@ const Project = () => {
   const handleStatusChange = async (e: any) => {
     setStatus(e.target.textContent);
     const newStatus = e.target.textContent.replace(' ', '_').toUpperCase();
-    console.log('Changing status of project with ID:', id);
-    console.log('New status:', newStatus);
     setOpen(!open);
-    const res = await fetcher(`/api/projects/${id}`, 'PUT', {
+    await fetcher(`/api/projects/${id}`, 'PUT', {
       status: newStatus
     });
-    console.log(res);
   };
 
   const handleDeketeProject = async () => {
     const res = await fetcher(`/api/projects/${id}`, 'DELETE', {});
-    console.log(res);
     window.location.href = '/projects';
   };
 
